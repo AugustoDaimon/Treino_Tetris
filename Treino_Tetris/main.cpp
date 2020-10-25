@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <time.h>
 
 using namespace sf;
@@ -32,12 +33,18 @@ bool check()
 	return 1;
 };
 
-
 int main() {
 	srand(time(0));
 
 	RenderWindow window(VideoMode(320, 480), "Tetris");
 
+	// MUSICA
+	Music music;
+	if (!music.openFromFile("Tetris_Music.wav"))
+		return -1; // error
+	music.play();
+	music.setLoop(true);
+	
 	Texture t1, t2, t3;
 	t1.loadFromFile("tiles.png");
 	t2.loadFromFile("background.png");
@@ -152,6 +159,6 @@ int main() {
 		window.draw(frame);
 		window.display();
 	}
-
+	 
 	return 0;
 }
